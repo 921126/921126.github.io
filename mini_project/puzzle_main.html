@@ -13,18 +13,20 @@
 </head>
 
 <body>
-    <h1 class="timer">ㅡ</h1><br>
+    <div class="timerBlock">
+        <h1 class="timer">ㅡ</h1><br>
+    </div>
     <div class="wrap">
         <ul class="img_wrap">
-            <li class="list1" draggable="true"></li>
-            <li class="list2" draggable="true"></li>
-            <li class="list3" draggable="true"></li>
-            <li class="list4" draggable="true"></li>
-            <li class="list5" draggable="true"></li>
-            <li class="list6" draggable="true"></li>
-            <li class="list7" draggable="true"></li>
-            <li class="list8" draggable="true"></li>
-            <li class="list9" draggable="true"></li>
+            <li class="list1"></li>
+            <li class="list2"></li>
+            <li class="list3"></li>
+            <li class="list4"></li>
+            <li class="list5"></li>
+            <li class="list6"></li>
+            <li class="list7"></li>
+            <li class="list8"></li>
+            <li class="list9"></li>
         </ul>
     </div>
 
@@ -44,7 +46,6 @@
         var li = document.querySelectorAll("li");
         var ul = document.querySelector(".img_wrap");
         rabbit.onclick = function () {
-
             for (var i = 0; i < li.length; i++) {
                 if (li[i].firstElementChild != null) {
                     li[i].firstElementChild.remove();
@@ -76,6 +77,9 @@
             if (li[0].innerHTML == "") {
                 alert('그림을 선택해주세요');
             } else {
+                for (var i = 0; i < li.length; i++) {
+                    li[i].draggable = "true";
+                }
                 start.disabled = "disabled"; //버튼 비활성
                 rabbit.disabled = "disabled";
                 snowman.disabled = "disabled";
@@ -91,73 +95,87 @@
                 for (var i = ul.children.length; i >= 0; i--) {
                     ul.appendChild(ul.children[Math.random() * i | 0]);
                 }
-            }
 
+                // wrap.removeChild(subImg);
+                var subImg = document.createElement("img");
+                var timerBlock = document.querySelector(".timerBlock");
+                if(ul.children[0].firstElementChild.src.indexOf('rabbit') != -1) {
+                    subImg.src = 'img/rabbit.png';
+                } else {
+                    subImg.src = 'img/snowman.jpg';
+                }
+                subImg.classList.add("subImg");
+                subImg.style.width = "100px";
+                subImg.style.height = "100px";
+                timerBlock.appendChild(subImg);
+                
+
+                // var currentItemIndex = null;
+                var currentItem = null;
+                ul.addEventListener("dragstart", (e) => {
+                    currentItem = e.target;
+                    currentItemInner = currentItem.parentElement.innerHTML;
+                    // var arr = [...currentItem.parentElement.children];
+                    // currentItemIndex = arr.indexOf(currentItem);
+                });
+                ul.addEventListener("dragover", (e) => {
+                    e.preventDefault();
+                });
+                ul.addEventListener("drop", (e) => {
+                    e.preventDefault();
+                    if (e.target.tagName != 'IMG') return;
+                    var currentDropItem = e.target;
+                    currentDropItemInner = currentDropItem.parentElement.innerHTML;
+                    // var arr = [...currentItem.parentElement.children];
+                    // var dropItemIndex = arr.indexOf(currentDropItem);
+                    currentItem.parentElement.innerHTML = currentDropItemInner;
+                    currentDropItem.parentElement.innerHTML = currentItemInner;
+
+                    // if(currentItemIndex < dropItemIndex) {
+                    //     currentDropItem.parentElement.after(currentItem.parentElement);
+                    //     console.log(currentDropItem.parentElement);
+                    //     console.log(currentItem.parentElement);
+                    // } else {
+                    //     currentDropItem.parentElement.before(currentItem.parentElement);
+                    //     console.log(currentDropItem.parentElement);
+                    //     console.log(currentItem.parentElement);
+                    // }
+                    console.log(ul.children[0].innerHTML == '<img src="img/snowman1.jpg">');
+                    if (ul.children[0].innerHTML == '<img src="img/snowman1.jpg">' &&
+                        ul.children[1].innerHTML == '<img src="img/snowman2.jpg">' &&
+                        ul.children[2].innerHTML == '<img src="img/snowman3.jpg">' &&
+                        ul.children[3].innerHTML == '<img src="img/snowman4.jpg">' &&
+                        ul.children[4].innerHTML == '<img src="img/snowman5.jpg">' &&
+                        ul.children[5].innerHTML == '<img src="img/snowman6.jpg">' &&
+                        ul.children[6].innerHTML == '<img src="img/snowman7.jpg">' &&
+                        ul.children[7].innerHTML == '<img src="img/snowman8.jpg">' &&
+                        ul.children[8].innerHTML == '<img src="img/snowman9.jpg">') {
+                        clearInterval(interv);
+                        alert('끝, 걸린 시간 : ' + (cnt-1)); //성공했을 때
+                        setTimeout(function () { //끝나면 새로고침
+                            location.reload();
+                        });
+                    }
+
+                    if (ul.children[0].innerHTML == '<img src="img/rabbit1.png">' &&
+                        ul.children[1].innerHTML == '<img src="img/rabbit2.png">' &&
+                        ul.children[2].innerHTML == '<img src="img/rabbit3.png">' &&
+                        ul.children[3].innerHTML == '<img src="img/rabbit4.png">' &&
+                        ul.children[4].innerHTML == '<img src="img/rabbit5.png">' &&
+                        ul.children[5].innerHTML == '<img src="img/rabbit6.png">' &&
+                        ul.children[6].innerHTML == '<img src="img/rabbit7.png">' &&
+                        ul.children[7].innerHTML == '<img src="img/rabbit8.png">' &&
+                        ul.children[8].innerHTML == '<img src="img/rabbit9.png">') {
+                        clearInterval(interv);
+                        alert('끝, 걸린 시간 : ' + (cnt-1)); //성공했을 때
+                        setTimeout(function () { //끝나면 새로고침
+                            location.reload();
+                        });
+                    }
+                });
+            }
         }
 
-        // var currentItemIndex = null;
-        var currentItem = null;
-        ul.addEventListener("dragstart", (e) => {
-            currentItem = e.target;
-            currentItemInner = currentItem.parentElement.innerHTML;
-            // var arr = [...currentItem.parentElement.children];
-            // currentItemIndex = arr.indexOf(currentItem);
-        });
-        ul.addEventListener("dragover", (e) => {
-            e.preventDefault();
-        });
-        ul.addEventListener("drop", (e) => {
-            e.preventDefault();
-            if (e.target.tagName != 'IMG') return;
-            var currentDropItem = e.target;
-            currentDropItemInner = currentDropItem.parentElement.innerHTML;
-            // var arr = [...currentItem.parentElement.children];
-            // var dropItemIndex = arr.indexOf(currentDropItem);
-            currentItem.parentElement.innerHTML = currentDropItemInner;
-            currentDropItem.parentElement.innerHTML = currentItemInner;
-
-            // if(currentItemIndex < dropItemIndex) {
-            //     currentDropItem.parentElement.after(currentItem.parentElement);
-            //     console.log(currentDropItem.parentElement);
-            //     console.log(currentItem.parentElement);
-            // } else {
-            //     currentDropItem.parentElement.before(currentItem.parentElement);
-            //     console.log(currentDropItem.parentElement);
-            //     console.log(currentItem.parentElement);
-            // }
-            console.log(ul.children[0].innerHTML == '<img src="img/snowman1.jpg">');
-            if (ul.children[0].innerHTML == '<img src="img/snowman1.jpg">' &&
-                ul.children[1].innerHTML == '<img src="img/snowman2.jpg">' &&
-                ul.children[2].innerHTML == '<img src="img/snowman3.jpg">' &&
-                ul.children[3].innerHTML == '<img src="img/snowman4.jpg">' &&
-                ul.children[4].innerHTML == '<img src="img/snowman5.jpg">' &&
-                ul.children[5].innerHTML == '<img src="img/snowman6.jpg">' &&
-                ul.children[6].innerHTML == '<img src="img/snowman7.jpg">' &&
-                ul.children[7].innerHTML == '<img src="img/snowman8.jpg">' &&
-                ul.children[8].innerHTML == '<img src="img/snowman9.jpg">') {
-                clearInterval(interv);
-                alert('끝, 걸린 시간 : ' + cnt); //성공했을 때
-                setTimeout(function () { //끝나면 새로고침
-                    location.reload();
-                });
-            }
-
-            if (ul.children[0].innerHTML == '<img src="img/rabbit1.png">' &&
-                ul.children[1].innerHTML == '<img src="img/rabbit2.png">' &&
-                ul.children[2].innerHTML == '<img src="img/rabbit3.png">' &&
-                ul.children[3].innerHTML == '<img src="img/rabbit4.png">' &&
-                ul.children[4].innerHTML == '<img src="img/rabbit5.png">' &&
-                ul.children[5].innerHTML == '<img src="img/rabbit6.png">' &&
-                ul.children[6].innerHTML == '<img src="img/rabbit7.png">' &&
-                ul.children[7].innerHTML == '<img src="img/rabbit8.png">' &&
-                ul.children[8].innerHTML == '<img src="img/rabbit9.png">') {
-                clearInterval(interv);
-                alert('끝, 걸린 시간 : ' + cnt); //성공했을 때
-                setTimeout(function () { //끝나면 새로고침
-                    location.reload();
-                });
-            }
-        });
 
     </script>
 </body>
