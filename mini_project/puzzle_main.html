@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1 class="timer">ㅡ</h1><br>
+    <div class="wrap">
+        <ul class="img_wrap">
+            <li class="list1" draggable="true"></li>
+            <li class="list2" draggable="true"></li>
+            <li class="list3" draggable="true"></li>
+            <li class="list4" draggable="true"></li>
+            <li class="list5" draggable="true"></li>
+            <li class="list6" draggable="true"></li>
+            <li class="list7" draggable="true"></li>
+            <li class="list8" draggable="true"></li>
+            <li class="list9" draggable="true"></li>
+        </ul>
+    </div>
+
+    <div class="menu">
+        <input type="button" class="rabbit" value="토끼"></checkbox>
+        <input type="button" class="snowman" value="눈사람"></checkbox>
+    </div>
+
+    <div class="btn">
+        <button class="start">시작</button>
+        <button class="reset">리셋</button>
+    </div>
+
+    <script>
+        var rabbit = document.querySelector(".rabbit");
+        var snowman = document.querySelector(".snowman");
+        var li = document.querySelectorAll("li");
+        var ul = document.querySelector(".img_wrap");
+        rabbit.onclick = function () {
+
+            for (var i = 0; i < li.length; i++) {
+                if (li[i].firstElementChild != null) {
+                    li[i].firstElementChild.remove();
+                }
+                var img = document.createElement("img");
+                img.src = "img/rabbit" + (i + 1) + ".png";
+                console.log(img);
+                li[i].appendChild(img);
+            }
+        }
+        snowman.onclick = function () {
+            for (var i = 0; i < li.length; i++) {
+                if (li[i].firstElementChild != null) {
+                    li[i].firstElementChild.remove();
+                }
+                var img = document.createElement("img");
+                img.src = "img/snowman" + (i + 1) + ".jpg";
+                console.log(img);
+                li[i].appendChild(img);
+            }
+        }
+
+        var start = document.querySelector(".start");
+        var timer = document.querySelector(".timer");
+        var cnt = 1;
+        var interv;
+        start.onclick = startPuzzle;
+        function startPuzzle() {
+            if (li[0].innerHTML == "") {
+                alert('그림을 선택해주세요');
+            } else {
+                start.disabled = "disabled"; //버튼 비활성
+                rabbit.disabled = "disabled";
+                snowman.disabled = "disabled";
+                interv = setInterval(function () { //타이머
+                    timer.innerHTML = cnt;
+                    cnt++;
+                    if (cnt > 30) {
+                        timer.style.color = "red";
+                    }
+                }, 1000);
+
+                //이미지 섞기
+                for (var i = ul.children.length; i >= 0; i--) {
+                    ul.appendChild(ul.children[Math.random() * i | 0]);
+                }
+            }
+
+        }
+
+        // var currentItemIndex = null;
+        var currentItem = null;
+        ul.addEventListener("dragstart", (e) => {
+            currentItem = e.target;
+            currentItemInner = currentItem.parentElement.innerHTML;
+            // var arr = [...currentItem.parentElement.children];
+            // currentItemIndex = arr.indexOf(currentItem);
+        });
+        ul.addEventListener("dragover", (e) => {
+            e.preventDefault();
+        });
+        ul.addEventListener("drop", (e) => {
+            e.preventDefault();
+            if (e.target.tagName != 'IMG') return;
+            var currentDropItem = e.target;
+            currentDropItemInner = currentDropItem.parentElement.innerHTML;
+            // var arr = [...currentItem.parentElement.children];
+            // var dropItemIndex = arr.indexOf(currentDropItem);
+            currentItem.parentElement.innerHTML = currentDropItemInner;
+            currentDropItem.parentElement.innerHTML = currentItemInner;
+
+            // if(currentItemIndex < dropItemIndex) {
+            //     currentDropItem.parentElement.after(currentItem.parentElement);
+            //     console.log(currentDropItem.parentElement);
+            //     console.log(currentItem.parentElement);
+            // } else {
+            //     currentDropItem.parentElement.before(currentItem.parentElement);
+            //     console.log(currentDropItem.parentElement);
+            //     console.log(currentItem.parentElement);
+            // }
+            console.log(ul.children[0].innerHTML == '<img src="img/snowman1.jpg">');
+            if (ul.children[0].innerHTML == '<img src="img/snowman1.jpg">' &&
+                ul.children[1].innerHTML == '<img src="img/snowman2.jpg">' &&
+                ul.children[2].innerHTML == '<img src="img/snowman3.jpg">' &&
+                ul.children[3].innerHTML == '<img src="img/snowman4.jpg">' &&
+                ul.children[4].innerHTML == '<img src="img/snowman5.jpg">' &&
+                ul.children[5].innerHTML == '<img src="img/snowman6.jpg">' &&
+                ul.children[6].innerHTML == '<img src="img/snowman7.jpg">' &&
+                ul.children[7].innerHTML == '<img src="img/snowman8.jpg">' &&
+                ul.children[8].innerHTML == '<img src="img/snowman9.jpg">') {
+                clearInterval(interv);
+                alert('끝, 걸린 시간 : ' + cnt); //성공했을 때
+                setTimeout(function () { //끝나면 새로고침
+                    location.reload();
+                });
+            }
+
+            if (ul.children[0].innerHTML == '<img src="img/rabbit1.png">' &&
+                ul.children[1].innerHTML == '<img src="img/rabbit2.png">' &&
+                ul.children[2].innerHTML == '<img src="img/rabbit3.png">' &&
+                ul.children[3].innerHTML == '<img src="img/rabbit4.png">' &&
+                ul.children[4].innerHTML == '<img src="img/rabbit5.png">' &&
+                ul.children[5].innerHTML == '<img src="img/rabbit6.png">' &&
+                ul.children[6].innerHTML == '<img src="img/rabbit7.png">' &&
+                ul.children[7].innerHTML == '<img src="img/rabbit8.png">' &&
+                ul.children[8].innerHTML == '<img src="img/rabbit9.png">') {
+                clearInterval(interv);
+                alert('끝, 걸린 시간 : ' + cnt); //성공했을 때
+                setTimeout(function () { //끝나면 새로고침
+                    location.reload();
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>
