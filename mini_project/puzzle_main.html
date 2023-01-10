@@ -5,8 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>퍼즐</title>
+    <link rel="icon" href="img/puzzle-piece_1f9e9.png">
+
+    <!-- css 링크 -->
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <!-- jquery 링크 -->
+    <!-- <script src="jquery/jquery-3.6.3.min.js"></script> -->
+    <!-- 부트스트랩 테마 -->
+
+    <!-- js 링크 -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+
     <link rel="stylesheet" href="style.css">
+    <!-- <script src="puzzle_main.js"></script> -->
     <style>
 
     </style>
@@ -14,7 +26,7 @@
 
 <body>
     <div class="timerBlock">
-        <h1 class="timer">ㅡ</h1><br>
+        <h1 class="timer">puzzle</h1><br>
     </div>
     <div class="wrap">
         <ul class="img_wrap">
@@ -35,15 +47,71 @@
         <input type="button" class="snowman" value="">
         <input type="button" class="peach" value="">
         <input type="button" class="apple" value="">
-        
+
     </div>
 
     <div class="btn">
-        <button class="start btn btn-lg btn-primary">시작</button>
-        <button class="reset">리셋</button>
+        <button class="start">시 작</button>
+        <button class="reset">리 셋</button>
     </div>
 
+    <body class="dimmed">
+        <div class="popup">
+            <div class="title">결과</div>
+            <div class="content">
+                <p class="time">시간</p>
+            </div>
+            <div class="cmd">
+                <input type="button" name="btnclose" class="btnmain" value="메인">
+                <input type="button" name="btnclose" class="btnclose" value="닫기">
+            </div>
+        </div>
+    </body>
+
     <script>
+        // 로딩 화면
+        window.onload = main;
+
+        var body = document.querySelector("body");
+        var div = document.createElement("div");
+        var container = document.createElement("div");
+        var bar = document.createElement("div");
+        function main() {
+
+            div.classList.add("loading");
+            container.id = "container";
+            bar.id = "bar";
+
+            container.appendChild(bar);
+            div.appendChild(container);
+            body.appendChild(div);
+            load();
+        }
+
+        // 로딩 바
+        var i = 0;
+        function load() {
+            if (i == 0) {
+                i = 1;
+                var elem = document.querySelector("#bar");
+                var width = 1;
+                var id = setInterval(frame, 10);
+                function frame() {
+                    if (width >= 100) {
+                        clearInterval(id);
+                        i = 0;
+                        var s = setTimeout(function () {
+                            div.remove();
+                        }, 500);
+                    } else {
+                        width++;
+                        elem.style.width = width + "%";
+                    }
+                }
+            }
+        }
+
+        //게임 화면
         var rabbit = document.querySelector(".rabbit");
         var snowman = document.querySelector(".snowman");
         var peach = document.querySelector(".peach");
@@ -80,7 +148,7 @@
                 li[i].appendChild(img);
             }
         }
-        apple.onclick = function() {
+        apple.onclick = function () {
             for (var i = 0; i < li.length; i++) {
                 if (li[i].firstElementChild != null) {
                     li[i].firstElementChild.remove();
@@ -92,6 +160,7 @@
         }
 
         var start = document.querySelector(".start");
+        var reset = document.querySelector(".reset");
         var timer = document.querySelector(".timer");
         var cnt = 1;
         var interv;
@@ -105,7 +174,15 @@
                 }
                 start.disabled = "disabled"; //버튼 비활성
                 rabbit.disabled = "disabled";
+                rabbit.style.transform = "none";
                 snowman.disabled = "disabled";
+                snowman.style.transform = "none";
+                peach.disabled = "disabled";
+                peach.style.transform = "none";
+                apple.disabled = "disabled";
+                apple.style.transform = "none";
+
+                reset.style.display = "inline-block";
                 interv = setInterval(function () { //타이머
                     timer.innerHTML = cnt;
                     cnt++;
@@ -122,31 +199,29 @@
                 // wrap.removeChild(subImg);
                 var subImg = document.createElement("img");
                 var timerBlock = document.querySelector(".timerBlock");
-                if(ul.children[0].firstElementChild.src.indexOf('rabbit') != -1) {
+                if (ul.children[0].firstElementChild.src.indexOf('rabbit') != -1) {
                     subImg.src = 'img/rabbit.png';
                 }
-                if(ul.children[0].firstElementChild.src.indexOf('snowman') != -1) {
+                if (ul.children[0].firstElementChild.src.indexOf('snowman') != -1) {
                     subImg.src = 'img/snowman.jpg';
                 }
-                if(ul.children[0].firstElementChild.src.indexOf('peach') != -1) {
+                if (ul.children[0].firstElementChild.src.indexOf('peach') != -1) {
                     subImg.src = 'img/peach.jpg';
                 }
-                if(ul.children[0].firstElementChild.src.indexOf('apple') != -1) {
+                if (ul.children[0].firstElementChild.src.indexOf('apple') != -1) {
                     subImg.src = 'img/apple.jpg';
                 }
                 subImg.classList.add("subImg");
                 subImg.style.width = "100px";
                 subImg.style.height = "100px";
                 timerBlock.appendChild(subImg);
-                
 
-                // var currentItemIndex = null;
+
+                var close = document.querySelector(".btnclose");
                 var currentItem = null;
                 ul.addEventListener("dragstart", (e) => {
                     currentItem = e.target;
                     currentItemInner = currentItem.parentElement.innerHTML;
-                    // var arr = [...currentItem.parentElement.children];
-                    // currentItemIndex = arr.indexOf(currentItem);
                 });
                 ul.addEventListener("dragover", (e) => {
                     e.preventDefault();
@@ -156,20 +231,9 @@
                     if (e.target.tagName != 'IMG') return;
                     var currentDropItem = e.target;
                     currentDropItemInner = currentDropItem.parentElement.innerHTML;
-                    // var arr = [...currentItem.parentElement.children];
-                    // var dropItemIndex = arr.indexOf(currentDropItem);
                     currentItem.parentElement.innerHTML = currentDropItemInner;
                     currentDropItem.parentElement.innerHTML = currentItemInner;
 
-                    // if(currentItemIndex < dropItemIndex) {
-                    //     currentDropItem.parentElement.after(currentItem.parentElement);
-                    //     console.log(currentDropItem.parentElement);
-                    //     console.log(currentItem.parentElement);
-                    // } else {
-                    //     currentDropItem.parentElement.before(currentItem.parentElement);
-                    //     console.log(currentDropItem.parentElement);
-                    //     console.log(currentItem.parentElement);
-                    // }
                     if (ul.children[0].innerHTML == '<img src="img/snowman1.jpg">' &&
                         ul.children[1].innerHTML == '<img src="img/snowman2.jpg">' &&
                         ul.children[2].innerHTML == '<img src="img/snowman3.jpg">' &&
@@ -180,10 +244,12 @@
                         ul.children[7].innerHTML == '<img src="img/snowman8.jpg">' &&
                         ul.children[8].innerHTML == '<img src="img/snowman9.jpg">') {
                         clearInterval(interv);
-                        alert(' 걸린 시간 : ' + (cnt-1)); //성공했을 때
-                        setTimeout(function () { //끝나면 새로고침
-                            location.reload();
-                        });
+                        var popup = document.querySelector(".popup");
+                        var time = document.querySelector(".time");
+                        popup.style.display = "block";
+                        time.innerHTML = "시간 : " + (cnt - 1) + " 초";
+                        reset.disabled = "disabled";
+                        close.onclick = closer;
                     }
 
                     if (ul.children[0].innerHTML == '<img src="img/rabbit1.png">' &&
@@ -196,10 +262,12 @@
                         ul.children[7].innerHTML == '<img src="img/rabbit8.png">' &&
                         ul.children[8].innerHTML == '<img src="img/rabbit9.png">') {
                         clearInterval(interv);
-                        alert('걸린 시간 : ' + (cnt-1)); //성공했을 때
-                        setTimeout(function () { //끝나면 새로고침
-                            location.reload();
-                        });
+                        var popup = document.querySelector(".popup");
+                        var time = document.querySelector(".time");
+                        popup.style.display = "block";
+                        time.innerHTML = "시간 : " + (cnt - 1) + " 초";
+                        reset.disabled = "disabled";
+                        close.onclick = closer;
                     }
 
                     if (ul.children[0].innerHTML == '<img src="img/peach1.jpg">' &&
@@ -212,10 +280,13 @@
                         ul.children[7].innerHTML == '<img src="img/peach8.jpg">' &&
                         ul.children[8].innerHTML == '<img src="img/peach9.jpg">') {
                         clearInterval(interv);
-                        alert('걸린 시간 : ' + (cnt-1)); //성공했을 때
-                        setTimeout(function () { //끝나면 새로고침
-                            location.reload();
-                        });
+                        var popup = document.querySelector(".popup");
+                        var time = document.querySelector(".time");
+                        popup.style.display = "block";
+                        reset.disabled = "disabled";
+                        time.innerHTML = "시간 : " + (cnt - 1) + " 초";
+                        reset.disabled = "disabled";
+                        close.onclick = closer;
                     }
 
                     if (ul.children[0].innerHTML == '<img src="img/apple1.jpg">' &&
@@ -228,25 +299,30 @@
                         ul.children[7].innerHTML == '<img src="img/apple8.jpg">' &&
                         ul.children[8].innerHTML == '<img src="img/apple9.jpg">') {
                         clearInterval(interv);
-                        alert('걸린 시간 : ' + (cnt-1)); //성공했을 때
-                        setTimeout(function () { //끝나면 새로고침
-                            location.reload();
-                        });
+                        var popup = document.querySelector(".popup");
+                        var time = document.querySelector(".time");
+                        popup.style.display = "block";
+                        time.innerHTML = "시간 : " + (cnt - 1) + " 초";
+                        reset.disabled = "disabled";
+                        close.onclick = closer;
                     }
                 });
 
-                var reset = document.querySelector(".reset");
-                reset.onclick = function() {
-                    if(confirm('초기 화면으로 돌아가시겠습니까?')) {
-                        setTimeout(function() { //확인 누르면 새로고침
+                function closer() {
+                    setTimeout(function () { //끝나면 새로고침
+                        location.reload();
+                    });
+                }
+
+                reset.onclick = function () {
+                    if (confirm('메인 화면으로 돌아가시겠습니까?')) {
+                        setTimeout(function () { //확인 누르면 새로고침
                             location.reload();
                         });
                     }
                 }
-
             }
         }
-
     </script>
 </body>
 
