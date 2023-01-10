@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: rgb(27, 29, 78);
+    color: white;
+}
+
 .timer {
     margin-top: 200px;
     text-align: center;
@@ -14,7 +19,6 @@
     width: 300px;
     height: 300px;
     margin: 0 auto;
-    /* border: 1px solid #777; */
 }
 
 .img_wrap {
@@ -25,7 +29,7 @@
 }
 
 .img_wrap li {
-    border: 1px solid #777;
+    border: 1px solid #666;
     width: 100px;
     height: 100px;
     float: left;
@@ -49,12 +53,29 @@
 
 .btn>button {
     display: inline-block;
-    width: 100px;
+    /* width: 100px;
     background-color: grey;
-    border: 1px solid grey;
+    border: 1px solid grey; */
     font-weight: bold;
 }
 
 .timerBlock {
     text-align: center;
+}
+
+.menu input{
+    width: 100px;
+    height: 100px;
+    border: 0;
+}
+.menu input:hover {
+    opacity: 0.7;
+}
+.menu .rabbit {background-image: url(img/rabbit.png);}
+.menu .snowman {background-image: url(img/snowman3.jpg);}
+.menu .peach {background-image: url(img/peach5.jpg);}
+.menu .apple {background-image: url(img/apple.jpg);}
+
+.subImg {
+    margin-bottom: 20px;
 }

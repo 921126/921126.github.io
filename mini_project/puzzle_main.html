@@ -31,18 +31,23 @@
     </div>
 
     <div class="menu">
-        <input type="button" class="rabbit" value="토끼"></checkbox>
-        <input type="button" class="snowman" value="눈사람"></checkbox>
+        <input type="button" class="rabbit" value="">
+        <input type="button" class="snowman" value="">
+        <input type="button" class="peach" value="">
+        <input type="button" class="apple" value="">
+        
     </div>
 
     <div class="btn">
-        <button class="start">시작</button>
+        <button class="start btn btn-lg btn-primary">시작</button>
         <button class="reset">리셋</button>
     </div>
 
     <script>
         var rabbit = document.querySelector(".rabbit");
         var snowman = document.querySelector(".snowman");
+        var peach = document.querySelector(".peach");
+        var apple = document.querySelector(".apple");
         var li = document.querySelectorAll("li");
         var ul = document.querySelector(".img_wrap");
         rabbit.onclick = function () {
@@ -52,7 +57,6 @@
                 }
                 var img = document.createElement("img");
                 img.src = "img/rabbit" + (i + 1) + ".png";
-                console.log(img);
                 li[i].appendChild(img);
             }
         }
@@ -63,7 +67,26 @@
                 }
                 var img = document.createElement("img");
                 img.src = "img/snowman" + (i + 1) + ".jpg";
-                console.log(img);
+                li[i].appendChild(img);
+            }
+        }
+        peach.onclick = function () {
+            for (var i = 0; i < li.length; i++) {
+                if (li[i].firstElementChild != null) {
+                    li[i].firstElementChild.remove();
+                }
+                var img = document.createElement("img");
+                img.src = "img/peach" + (i + 1) + ".jpg";
+                li[i].appendChild(img);
+            }
+        }
+        apple.onclick = function() {
+            for (var i = 0; i < li.length; i++) {
+                if (li[i].firstElementChild != null) {
+                    li[i].firstElementChild.remove();
+                }
+                var img = document.createElement("img");
+                img.src = "img/apple" + (i + 1) + ".jpg";
                 li[i].appendChild(img);
             }
         }
@@ -86,7 +109,7 @@
                 interv = setInterval(function () { //타이머
                     timer.innerHTML = cnt;
                     cnt++;
-                    if (cnt > 30) {
+                    if (cnt > 20) {
                         timer.style.color = "red";
                     }
                 }, 1000);
@@ -101,8 +124,15 @@
                 var timerBlock = document.querySelector(".timerBlock");
                 if(ul.children[0].firstElementChild.src.indexOf('rabbit') != -1) {
                     subImg.src = 'img/rabbit.png';
-                } else {
+                }
+                if(ul.children[0].firstElementChild.src.indexOf('snowman') != -1) {
                     subImg.src = 'img/snowman.jpg';
+                }
+                if(ul.children[0].firstElementChild.src.indexOf('peach') != -1) {
+                    subImg.src = 'img/peach.jpg';
+                }
+                if(ul.children[0].firstElementChild.src.indexOf('apple') != -1) {
+                    subImg.src = 'img/apple.jpg';
                 }
                 subImg.classList.add("subImg");
                 subImg.style.width = "100px";
@@ -140,7 +170,6 @@
                     //     console.log(currentDropItem.parentElement);
                     //     console.log(currentItem.parentElement);
                     // }
-                    console.log(ul.children[0].innerHTML == '<img src="img/snowman1.jpg">');
                     if (ul.children[0].innerHTML == '<img src="img/snowman1.jpg">' &&
                         ul.children[1].innerHTML == '<img src="img/snowman2.jpg">' &&
                         ul.children[2].innerHTML == '<img src="img/snowman3.jpg">' &&
@@ -151,7 +180,7 @@
                         ul.children[7].innerHTML == '<img src="img/snowman8.jpg">' &&
                         ul.children[8].innerHTML == '<img src="img/snowman9.jpg">') {
                         clearInterval(interv);
-                        alert('끝, 걸린 시간 : ' + (cnt-1)); //성공했을 때
+                        alert(' 걸린 시간 : ' + (cnt-1)); //성공했을 때
                         setTimeout(function () { //끝나면 새로고침
                             location.reload();
                         });
@@ -167,15 +196,56 @@
                         ul.children[7].innerHTML == '<img src="img/rabbit8.png">' &&
                         ul.children[8].innerHTML == '<img src="img/rabbit9.png">') {
                         clearInterval(interv);
-                        alert('끝, 걸린 시간 : ' + (cnt-1)); //성공했을 때
+                        alert('걸린 시간 : ' + (cnt-1)); //성공했을 때
+                        setTimeout(function () { //끝나면 새로고침
+                            location.reload();
+                        });
+                    }
+
+                    if (ul.children[0].innerHTML == '<img src="img/peach1.jpg">' &&
+                        ul.children[1].innerHTML == '<img src="img/peach2.jpg">' &&
+                        ul.children[2].innerHTML == '<img src="img/peach3.jpg">' &&
+                        ul.children[3].innerHTML == '<img src="img/peach4.jpg">' &&
+                        ul.children[4].innerHTML == '<img src="img/peach5.jpg">' &&
+                        ul.children[5].innerHTML == '<img src="img/peach6.jpg">' &&
+                        ul.children[6].innerHTML == '<img src="img/peach7.jpg">' &&
+                        ul.children[7].innerHTML == '<img src="img/peach8.jpg">' &&
+                        ul.children[8].innerHTML == '<img src="img/peach9.jpg">') {
+                        clearInterval(interv);
+                        alert('걸린 시간 : ' + (cnt-1)); //성공했을 때
+                        setTimeout(function () { //끝나면 새로고침
+                            location.reload();
+                        });
+                    }
+
+                    if (ul.children[0].innerHTML == '<img src="img/apple1.jpg">' &&
+                        ul.children[1].innerHTML == '<img src="img/apple2.jpg">' &&
+                        ul.children[2].innerHTML == '<img src="img/apple3.jpg">' &&
+                        ul.children[3].innerHTML == '<img src="img/apple4.jpg">' &&
+                        ul.children[4].innerHTML == '<img src="img/apple5.jpg">' &&
+                        ul.children[5].innerHTML == '<img src="img/apple6.jpg">' &&
+                        ul.children[6].innerHTML == '<img src="img/apple7.jpg">' &&
+                        ul.children[7].innerHTML == '<img src="img/apple8.jpg">' &&
+                        ul.children[8].innerHTML == '<img src="img/apple9.jpg">') {
+                        clearInterval(interv);
+                        alert('걸린 시간 : ' + (cnt-1)); //성공했을 때
                         setTimeout(function () { //끝나면 새로고침
                             location.reload();
                         });
                     }
                 });
+
+                var reset = document.querySelector(".reset");
+                reset.onclick = function() {
+                    if(confirm('초기 화면으로 돌아가시겠습니까?')) {
+                        setTimeout(function() { //확인 누르면 새로고침
+                            location.reload();
+                        });
+                    }
+                }
+
             }
         }
-
 
     </script>
 </body>
