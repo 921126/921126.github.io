@@ -1,4 +1,20 @@
 
+
+//팝업처리
+window.onload = function(){
+
+    if(document.cookie.indexOf("mainPopup") != -1){
+        console.log("쿠키확인");
+    }else{
+        window.open("popup.html", "후원창", "width=390px, height=270px");
+    }
+}
+
+
+
+
+
+// 검색처리
 var searchBtn = document.querySelector(".search-btn");
 
 searchBtn.onclick = function(){
@@ -20,3 +36,6 @@ searchBtn.onclick = function(){
     }
 
 }
+
+
+
