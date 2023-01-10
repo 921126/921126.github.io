@@ -11,7 +11,7 @@
     <!-- css 링크 -->
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
     <!-- jquery 링크 -->
-    <!-- <script src="jquery/jquery-3.6.3.min.js"></script> -->
+    <script src="jquery/jquery-3.6.3.min.js"></script>
     <!-- 부트스트랩 테마 -->
 
     <!-- js 링크 -->
@@ -56,9 +56,10 @@
     </div>
 
     <body class="dimmed">
-        <div class="popup">
+        <div id="pop" class="popup">
             <div class="title">결과</div>
             <div class="content">
+                <p>축하합니다 !</p>
                 <p class="time">시간</p>
             </div>
             <div class="cmd">
@@ -249,7 +250,20 @@
                         popup.style.display = "block";
                         time.innerHTML = "시간 : " + (cnt - 1) + " 초";
                         reset.disabled = "disabled";
-                        close.onclick = closer;
+                        for(var i = 0; i < li.length; i++) {
+                            li[i].draggable = false;
+                            li[i].firstElementChild.draggable = false;
+                        }
+                        subImg.draggable = false;
+                        $(document).ready(function () {
+                            $(".btnclose").click(function () {
+                                $("#pop").fadeOut("slow");
+                                reset.disabled = false;
+                                reset.innerHTML = "다시 하기";
+                                start.style.display = "none";
+                            });
+                        });
+                        // close.onclick = closer;
                     }
 
                     if (ul.children[0].innerHTML == '<img src="img/rabbit1.png">' &&
@@ -267,7 +281,20 @@
                         popup.style.display = "block";
                         time.innerHTML = "시간 : " + (cnt - 1) + " 초";
                         reset.disabled = "disabled";
-                        close.onclick = closer;
+                        for(var i = 0; i < li.length; i++) {
+                            li[i].draggable = false;
+                            li[i].firstElementChild.draggable = false;
+                        }
+                        subImg.draggable = false;
+                        $(document).ready(function () {
+                            $(".btnclose").click(function () {
+                                $("#pop").fadeOut("slow");
+                                reset.disabled = false;
+                                reset.innerHTML = "다시 하기";
+                                start.style.display = "none";
+                            });
+                        });
+                        // close.onclick = closer;
                     }
 
                     if (ul.children[0].innerHTML == '<img src="img/peach1.jpg">' &&
@@ -286,7 +313,20 @@
                         reset.disabled = "disabled";
                         time.innerHTML = "시간 : " + (cnt - 1) + " 초";
                         reset.disabled = "disabled";
-                        close.onclick = closer;
+                        for(var i = 0; i < li.length; i++) {
+                            li[i].draggable = false;
+                            li[i].firstElementChild.draggable = false;
+                        }
+                        subImg.draggable = false;
+                        $(document).ready(function () {
+                            $(".btnclose").click(function () {
+                                $("#pop").fadeOut("slow");
+                                reset.disabled = false;
+                                reset.innerHTML = "다시 하기";
+                                start.style.display = "none";
+                            });
+                        });
+                        // close.onclick = closer;
                     }
 
                     if (ul.children[0].innerHTML == '<img src="img/apple1.jpg">' &&
@@ -304,7 +344,20 @@
                         popup.style.display = "block";
                         time.innerHTML = "시간 : " + (cnt - 1) + " 초";
                         reset.disabled = "disabled";
-                        close.onclick = closer;
+                        for(var i = 0; i < li.length; i++) {
+                            li[i].draggable = false;
+                            li[i].firstElementChild.draggable = false;
+                        }
+                        subImg.draggable = false;
+                        $(document).ready(function () {
+                            $(".btnclose").click(function () {
+                                $("#pop").fadeOut("slow");
+                                reset.disabled = false;
+                                reset.innerHTML = "다시 하기";
+                                start.style.display = "none";
+                            });
+                        });
+                        // close.onclick = closer;
                     }
                 });
 
