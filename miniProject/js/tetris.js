@@ -208,6 +208,8 @@ function showGameOverText() {
     gameText.style.display = "flex";
     score = 0;
     scoreDisplay.innerHTML = score;
+    level = 0;
+    levelDisplay.innerHTML = level;
 
 }
 //event handling ( 테트리스 이동 이벤트 )
