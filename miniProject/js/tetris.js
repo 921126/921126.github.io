@@ -7,6 +7,7 @@ const gameSet = document.querySelector(".game_start");
 const scoreDisplay = document.querySelector(".score");
 const restartButton = document.querySelector(".game_txt > button");
 const startButton = document.querySelector(".game_start > button");
+const levelDisplay = document.querySelector(".level > span");
 
 //Setting (테트리스 가로세로 판 크기지정값)
 const GAME_ROWS = 20;
@@ -14,7 +15,8 @@ const GAME_COLS = 10;
 
 //variables 변수
 let score = 0;
-let duration = 500;
+let level = 0;
+let duration = 700;
 let downInterval;
 let tempMovingItem;
 
@@ -131,6 +133,19 @@ function checkMatch() {
             prependNewline();
             score += 10;
             scoreDisplay.innerHTML = score;
+            if(score === 50){
+                level = 1;
+                levelDisplay.innerHTML = level;
+                duration = 500;
+            }else if(score === 100){
+                level = 2;
+                levelDisplay.innerHTML = level;
+                duration = 300;
+            }else if(score === 150){
+                level = 3;
+                levelDisplay.innerHTML = level;
+                duration = 100;
+            }
         }
     })
     generateNewBlock();
@@ -193,6 +208,7 @@ function showGameOverText() {
     gameText.style.display = "flex";
     score = 0;
     scoreDisplay.innerHTML = score;
+
 }
 //event handling ( 테트리스 이동 이벤트 )
 document.addEventListener("keydown", e => {
