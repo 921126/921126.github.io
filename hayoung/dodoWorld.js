@@ -37,5 +37,10 @@ searchBtn.onclick = function(){
 
 }
 
+// 선택시 사진커지기
+
+var clickimg = document.querySelector(".box-container");
+
+
 
 
