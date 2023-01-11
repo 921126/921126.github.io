@@ -54,6 +54,7 @@
         <button class="start">시 작</button>
         <button class="reset">리 셋</button>
     </div>
+
     <div class="home_wrap" style="text-align: center; margin-top: 20px;">
         <input type="button" class="back">
     </div>
@@ -62,7 +63,7 @@
         <div id="pop" class="popup">
             <div class="title">결과</div>
             <div class="content">
-                <p>축하합니다 !</p>
+                <p class="cong">축하합니다 !</p>
                 <p class="time">시간</p>
             </div>
             <div class="cmd">
@@ -122,6 +123,13 @@
         var apple = document.querySelector(".apple");
         var li = document.querySelectorAll("li");
         var ul = document.querySelector(".img_wrap");
+        var back = document.querySelector(".back");
+                back.onclick = function() {
+                    if(confirm('메인 화면으로 돌아가시겠습니까?')) {
+                        location.href='/ProjectHome/HomePage.html';
+                    }
+                }
+                
         rabbit.onclick = function () {
             for (var i = 0; i < li.length; i++) {
                 if (li[i].firstElementChild != null) {
@@ -220,7 +228,9 @@
                 subImg.style.height = "100px";
                 timerBlock.appendChild(subImg);
 
-
+                
+                var popup = document.querySelector(".popup");
+                var time = document.querySelector(".time");
                 var close = document.querySelector(".btnclose");
                 var currentItem = null;
                 ul.addEventListener("dragstart", (e) => {
@@ -237,7 +247,7 @@
                     currentDropItemInner = currentDropItem.parentElement.innerHTML;
                     currentItem.parentElement.innerHTML = currentDropItemInner;
                     currentDropItem.parentElement.innerHTML = currentItemInner;
-
+                    
                     if (ul.children[0].innerHTML == '<img src="img/snowman1.jpg">' &&
                         ul.children[1].innerHTML == '<img src="img/snowman2.jpg">' &&
                         ul.children[2].innerHTML == '<img src="img/snowman3.jpg">' &&
@@ -248,8 +258,7 @@
                         ul.children[7].innerHTML == '<img src="img/snowman8.jpg">' &&
                         ul.children[8].innerHTML == '<img src="img/snowman9.jpg">') {
                         clearInterval(interv);
-                        var popup = document.querySelector(".popup");
-                        var time = document.querySelector(".time");
+                        back.disabled = true;
                         popup.style.display = "block";
                         time.innerHTML = "시간 : " + (cnt - 1) + " 초";
                         reset.disabled = "disabled";
@@ -258,12 +267,18 @@
                             li[i].firstElementChild.draggable = false;
                         }
                         subImg.draggable = false;
+                        
+                        btnmain.onclick = function() {
+                            location.reload()
+                        }
+
                         $(document).ready(function () {
                             $(".btnclose").click(function () {
                                 $("#pop").fadeOut("slow");
                                 reset.disabled = false;
                                 reset.innerHTML = "다시 하기";
                                 start.style.display = "none";
+                                back.disabled = false;
                             });
                         });
                         // close.onclick = closer;
@@ -279,8 +294,7 @@
                         ul.children[7].innerHTML == '<img src="img/rabbit8.png">' &&
                         ul.children[8].innerHTML == '<img src="img/rabbit9.png">') {
                         clearInterval(interv);
-                        var popup = document.querySelector(".popup");
-                        var time = document.querySelector(".time");
+                        back.disabled = true;
                         popup.style.display = "block";
                         time.innerHTML = "시간 : " + (cnt - 1) + " 초";
                         reset.disabled = "disabled";
@@ -289,12 +303,18 @@
                             li[i].firstElementChild.draggable = false;
                         }
                         subImg.draggable = false;
+
+                        btnmain.onclick = function() {
+                            location.reload()
+                        }
+
                         $(document).ready(function () {
                             $(".btnclose").click(function () {
                                 $("#pop").fadeOut("slow");
                                 reset.disabled = false;
                                 reset.innerHTML = "다시 하기";
                                 start.style.display = "none";
+                                back.disabled = false;
                             });
                         });
                         // close.onclick = closer;
@@ -310,8 +330,7 @@
                         ul.children[7].innerHTML == '<img src="img/peach8.jpg">' &&
                         ul.children[8].innerHTML == '<img src="img/peach9.jpg">') {
                         clearInterval(interv);
-                        var popup = document.querySelector(".popup");
-                        var time = document.querySelector(".time");
+                        back.disabled = true;
                         popup.style.display = "block";
                         reset.disabled = "disabled";
                         time.innerHTML = "시간 : " + (cnt - 1) + " 초";
@@ -321,12 +340,18 @@
                             li[i].firstElementChild.draggable = false;
                         }
                         subImg.draggable = false;
+
+                        btnmain.onclick = function() {
+                            location.reload()
+                        }
+
                         $(document).ready(function () {
                             $(".btnclose").click(function () {
                                 $("#pop").fadeOut("slow");
                                 reset.disabled = false;
                                 reset.innerHTML = "다시 하기";
                                 start.style.display = "none";
+                                back.disabled = false;
                             });
                         });
                         // close.onclick = closer;
@@ -342,8 +367,7 @@
                         ul.children[7].innerHTML == '<img src="img/apple8.jpg">' &&
                         ul.children[8].innerHTML == '<img src="img/apple9.jpg">') {
                         clearInterval(interv);
-                        var popup = document.querySelector(".popup");
-                        var time = document.querySelector(".time");
+                        back.disabled = true;
                         popup.style.display = "block";
                         time.innerHTML = "시간 : " + (cnt - 1) + " 초";
                         reset.disabled = "disabled";
@@ -352,12 +376,18 @@
                             li[i].firstElementChild.draggable = false;
                         }
                         subImg.draggable = false;
+
+                        btnmain.onclick = function() {
+                            location.reload()
+                        }
+                        
                         $(document).ready(function () {
                             $(".btnclose").click(function () {
                                 $("#pop").fadeOut("slow");
                                 reset.disabled = false;
                                 reset.innerHTML = "다시 하기";
                                 start.style.display = "none";
+                                back.disabled = false;
                             });
                         });
                         // close.onclick = closer;
@@ -370,12 +400,37 @@
                     });
                 }
 
+                var title = document.querySelector(".title");
+                var cong = document.querySelector(".cong");
+                var btnmain = document.querySelector(".btnmain");
+                var btnclose = document.querySelector(".btnclose");
                 reset.onclick = function () {
-                    if (confirm('메인 화면으로 돌아가시겠습니까?')) {
-                        setTimeout(function () { //확인 누르면 새로고침
-                            location.reload();
-                        });
-                    }
+                    // if(confirm('게임 화면으로 돌아가시겠습니까?')) {
+                    //     setTimeout(function () { //확인 누르면 새로고침
+                    //         location.reload();
+                    //     });
+                    // }
+                    popup.style.display = "block";
+                    title.innerHTML = "알림";
+                    cong.innerHTML = "";
+                    back.disabled = true;
+                    time.innerHTML = "다시 시작하시겠습니까?";
+                    btnmain.value = "Yes";
+                    btnmain.onclick = yes;
+                    btnclose.value = "No";
+                    btnclose.onclick = no;
+                }
+
+                function yes() {
+                    location.reload();
+                }
+                function no() {
+                    title.innerHTML = "결과";
+                    cong.innerHTML = "축하합니다 !";
+                    btnmain.value = "메인";
+                    btnclose.value = "닫기";
+                    popup.style.display = "none";
+                    back.disabled = false;
                 }
             }
         }
