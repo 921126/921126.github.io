@@ -47,6 +47,7 @@
         <input type="button" class="snowman" value="">
         <input type="button" class="peach" value="">
         <input type="button" class="apple" value="">
+        <input type="button" class="ocean">
         
     </div>
 
@@ -121,6 +122,7 @@
         var snowman = document.querySelector(".snowman");
         var peach = document.querySelector(".peach");
         var apple = document.querySelector(".apple");
+        var ocean = document.querySelector(".ocean");
         var li = document.querySelectorAll("li");
         var ul = document.querySelector(".img_wrap");
         var back = document.querySelector(".back");
@@ -170,6 +172,16 @@
                 li[i].appendChild(img);
             }
         }
+        ocean.onclick = function () {
+            for (var i = 0; i < li.length; i++) {
+                if (li[i].firstElementChild != null) {
+                    li[i].firstElementChild.remove();
+                }
+                var img = document.createElement("img");
+                img.src = "img/ocean" + (i + 1) + ".jpg";
+                li[i].appendChild(img);
+            }
+        }
 
         var start = document.querySelector(".start");
         var reset = document.querySelector(".reset");
@@ -211,6 +223,7 @@
                 // wrap.removeChild(subImg);
                 var subImg = document.createElement("img");
                 var timerBlock = document.querySelector(".timerBlock");
+                subImg.draggable = false;
                 if (ul.children[0].firstElementChild.src.indexOf('rabbit') != -1) {
                     subImg.src = 'img/rabbit.png';
                 }
@@ -222,6 +235,9 @@
                 }
                 if (ul.children[0].firstElementChild.src.indexOf('apple') != -1) {
                     subImg.src = 'img/apple.jpg';
+                }
+                if (ul.children[0].firstElementChild.src.indexOf('ocean') != -1) {
+                    subImg.src = 'img/ocean.jpg';
                 }
                 subImg.classList.add("subImg");
                 subImg.style.width = "100px";
@@ -266,7 +282,6 @@
                             li[i].draggable = false;
                             li[i].firstElementChild.draggable = false;
                         }
-                        subImg.draggable = false;
                         
                         btnmain.onclick = function() {
                             location.reload()
@@ -302,7 +317,6 @@
                             li[i].draggable = false;
                             li[i].firstElementChild.draggable = false;
                         }
-                        subImg.draggable = false;
 
                         btnmain.onclick = function() {
                             location.reload()
@@ -339,7 +353,42 @@
                             li[i].draggable = false;
                             li[i].firstElementChild.draggable = false;
                         }
-                        subImg.draggable = false;
+
+                        btnmain.onclick = function() {
+                            location.reload()
+                        }
+
+                        $(document).ready(function () {
+                            $(".btnclose").click(function () {
+                                $("#pop").fadeOut("slow");
+                                reset.disabled = false;
+                                reset.innerHTML = "다시 하기";
+                                start.style.display = "none";
+                                back.disabled = false;
+                            });
+                        });
+                        // close.onclick = closer;
+                    }
+
+                    if (ul.children[0].innerHTML == '<img src="img/ocean1.jpg">' &&
+                        ul.children[1].innerHTML == '<img src="img/ocean2.jpg">' &&
+                        ul.children[2].innerHTML == '<img src="img/ocean3.jpg">' &&
+                        ul.children[3].innerHTML == '<img src="img/ocean4.jpg">' &&
+                        ul.children[4].innerHTML == '<img src="img/ocean5.jpg">' &&
+                        ul.children[5].innerHTML == '<img src="img/ocean6.jpg">' &&
+                        ul.children[6].innerHTML == '<img src="img/ocean7.jpg">' &&
+                        ul.children[7].innerHTML == '<img src="img/ocean8.jpg">' &&
+                        ul.children[8].innerHTML == '<img src="img/ocean9.jpg">') {
+                        clearInterval(interv);
+                        back.disabled = true;
+                        popup.style.display = "block";
+                        reset.disabled = "disabled";
+                        time.innerHTML = "시간 : " + (cnt - 1) + " 초";
+                        reset.disabled = "disabled";
+                        for(var i = 0; i < li.length; i++) {
+                            li[i].draggable = false;
+                            li[i].firstElementChild.draggable = false;
+                        }
 
                         btnmain.onclick = function() {
                             location.reload()
@@ -375,12 +424,11 @@
                             li[i].draggable = false;
                             li[i].firstElementChild.draggable = false;
                         }
-                        subImg.draggable = false;
 
                         btnmain.onclick = function() {
                             location.reload()
                         }
-                        
+
                         $(document).ready(function () {
                             $(".btnclose").click(function () {
                                 $("#pop").fadeOut("slow");
