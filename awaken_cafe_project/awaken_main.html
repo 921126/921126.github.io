@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+     <!--font awessome 링크-->
+     <script src="https://kit.fontawesome.com/ea832437c4.js" crossorigin="anonymous"></script>
+
     <!-- bootstrap 링크-->
      <!--css링크-->
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
@@ -21,6 +24,13 @@
     <!--내꺼 css 링크-->
     <link rel="stylesheet" type="text/css" href="ak_main.css">
 
+    <!--aos 링크-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
 
 
 </head>
@@ -30,13 +40,24 @@
     <header>
         <div class="wrap">
             <div id="store_logo_wrap">
-                <div class="store_name">Awaken</div>
+                <div class="store_name">
+                    <i class="fa-sharp fa-solid fa-mug-hot"></i>
+                    Awaken
+                    <nav>
+                        <i class=" fa fa-brands fa-instagram"></i>
+                    </nav>
+                </div>
             </div>
             <ul class="header_list">
-                <li><a href="#">어웨이큰 소개</a></li>
-                <li><a href="#">메뉴</a></li>
-                <li><a href="#">제품 판매</a></li>
-                <li><a href="awaken_address.html">오시는 길</a></li>
+                <div><li><a href="#">어웨이큰 소개</a></li></div>
+                <div>
+                    <li class="menu_nav">
+                        <h4><a href="#">메뉴</a>
+                        </h4>
+                    </li>
+                </div>
+                <div><li><a href="#">제품 판매</a></li></div>
+                <div><li><a href="awaken_address.html">오시는 길</a></li></div>
             </ul>
         </div>
     </header>
@@ -83,7 +104,7 @@
 
     <section id="menu_appeal">
         <div class="box">
-            <div class="box_left">
+            <div class="box_left" data-aos="fade-right">
                 <dl>
                     <dt class="menu_title">
                         AWAKEN COFFE <br>
