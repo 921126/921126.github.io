@@ -8,11 +8,17 @@
     <link rel="icon" href="/ProjectHome/img/rabbit.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
     <link rel="stylesheet" href="/miniProject/css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <div class="wrapper">
         <div class="game_start">
             <span>게임을 시작하겠습니까?</span>
+            <div class="gameInfo">
+                <span>1. 블록을 한 줄로 맞추어서 레벨을 올리세요.</span><br>
+                <span>2. 50점 단위로 레벨이 올라갑니다.</span><br>
+                <span>3. 레벨은 총 3단계입니다. 레벨이 높아지면 속도가 올라갑니다.</span>
+            </div>
             <button>game start</button>
         </div>
 
@@ -25,6 +31,10 @@
         <div class="score">0</div>
         <div class="playground">
             <ul></ul>
+        </div>
+        <div class="level">
+            Level.
+            <span>0</span>
         </div>
     </div>
 

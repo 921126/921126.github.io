@@ -18,7 +18,6 @@ html, body {
 
 body {
     background-image: url(img/beige.jpg);
-    background-repeat: no-repeat;
     background-size: cover;
     position: relative;
 }
@@ -157,6 +156,7 @@ body.dimmed::before { /* 결과 팝업창 */
 .menu .snowman {background-image: url(img/snowman3.jpg);}
 .menu .peach {background-image: url(img/peach5.jpg);}
 .menu .apple {background-image: url(img/apple.jpg);}
+.menu .ocean {background-image: url(img/ocean1.jpg);}
 
 .subImg {
     margin-bottom: 20px;
