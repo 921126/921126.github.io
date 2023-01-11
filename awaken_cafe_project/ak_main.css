@@ -11,15 +11,18 @@ body{
 /*header 부분*/
 header{
 }
-ul.header_list{
+.header_list{
     margin: 0;
+}
+.header_list >div{
+    display: inline-block;
 }
 header .wrap{
     position: fixed;
     top: 0;
     width: 100%;
     background-color: coral;
-    z-index: 1;
+    z-index: 3;
 }
 #store_logo_wrap{
     margin: 0 auto;
@@ -31,16 +34,26 @@ header .wrap{
     color: #fff;
     font-weight: bold;
     height: 75px;
+    overflow: hidden;
+}
+.store_name i{
+    padding-top: 20px;
+    padding-left: 20px;
+    margin-left: 10px;
+    float: left;
 }
 .header_list{
     text-align: center;
 }
-.header_list li{
+.header_list > div{
     display: inline-block;
     margin: 0 40px;
     padding: 10px;
     font-size: 20px;
+    overflow: hidden;
 }
+
+
 .header_list li:hover{
     text-decoration: underline;
 }
