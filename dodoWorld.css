@@ -110,4 +110,28 @@ img{ max-width: 100%; height: auto;}
     flex-basis: 25%;
     padding: 20px 20px;
     box-sizing: border-box;
+    position: relative;
+}
+
+
+/* 호버콘텐츠 해보기 */
+
+.box-container li .hover_cont{
+    position: absolute;
+    text-align: center;
+    top: 20px;
+    width: 415px;
+    height: 553.33px;
+    line-height: 553.33px;
+    opacity: 0;
+    color: white;
+    font-size: 36px;
+    font-weight: 800;
+
+    transition: opacity 0.13s ease-in-out;
+}
+
+.box-container li:hover .hover_cont{
+    opacity: 0.6;
+    background-color: black;
 }
